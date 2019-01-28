@@ -13,7 +13,6 @@ class Main extends ListenerManager
   public function onLoad()
   {
     self::assignInstance();
-    self::dispenseExecutors();
     self::info("[".self::PLUGIN_NAME."] is Loading...");
   }
   public function onEnable()
