@@ -1,5 +1,5 @@
 <?php
-namespace src\yxmingy\OnlineAward\task;
+namespace yxmingy\OnlineAward\task;
 
 use pocketmine\scheduler\Task;
 use yxmingy\OnlineAward\Main;
