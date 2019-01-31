@@ -27,6 +27,7 @@ class OnlinePlayerRecord implements Listener
     public function onPlayerQuit(PlayerQuitEvent $event):void
     {
         unset(self::$record[$event->getPlayer()->getName()]);
+        task\AwardTask::delRecord($event->getPlayer()->getName());
     }
 }
 
