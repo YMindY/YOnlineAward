@@ -14,7 +14,7 @@ class AwardTask extends Task
     public function __construct(Main $own)
     {
         $this->own = $own;
-        $this->time = $own->getConfig()->get("奖励时间");
+        $this->time = $own->getConf()->get("奖励时间");
     }
     public static function delRecord(string $name):void
     {
