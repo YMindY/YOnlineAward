@@ -14,7 +14,7 @@ class AwardTask extends Task
     public function __construct(Main $own)
     {
         $this->own = $own;
-        $this->time = $own->conf->get("奖励时间");
+        $this->time = $own->getConfig()->get("奖励时间");
     }
     public static function delRecord(string $name):void
     {
@@ -27,8 +27,8 @@ class AwardTask extends Task
             $time = OnlinePlayerRecord::getOnlineTime($name);
             $player->sendPopup("已在线: ".$time."分钟");
             //如果存在这个家伙的领奖记录或现时-记录时间>=奖励时间
-            if(!isset(self::$record[$name]) || $time-self::$record[$name] >= $this->time){
-                self::record[$name] = $time;
+            if(!isset(self::$record[$name]) || ($time-(self::$record[$name])) >= $this->time){
+                self::$record[$name] = $time;
                 foreach ($this->own->conf->get("奖励指令") as $cmd){
                     $this->own->getServer()->dispatchCommand(new ConsoleCommandSender(), str_replace("@p", $player->getName(), $cmd));
                 }

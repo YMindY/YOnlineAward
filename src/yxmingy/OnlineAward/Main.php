@@ -14,6 +14,10 @@ class Main extends ListenerManager
 {
   const PLUGIN_NAME = "YOnlineAward";
   private $conf;
+  public function getConf()
+  {
+      return $this->conf;
+  }
   public function onLoad()
   {
     self::assignInstance();
