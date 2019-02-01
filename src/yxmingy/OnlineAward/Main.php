@@ -31,7 +31,7 @@ class Main extends ListenerManager
         10=>["tell @p 你获得了10分钟在线奖励！"],
     ));
     
-    $this->getScheduler()->scheduleRepeatingTask(new AwardTask($this), 20);
+    $this->getScheduler()->scheduleRepeatingTask(new AwardTask($this), 30);
     self::notice("[".self::PLUGIN_NAME."] is Enabled by xMing!");
   }
   public function onDisable()

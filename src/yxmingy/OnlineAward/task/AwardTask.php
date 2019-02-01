@@ -29,7 +29,7 @@ class AwardTask extends Task
             
             if(in_array($time,$this->time) && (!isset(self::$record[$name]) || self::$record[$name] != $time)){
                 self::$record[$name] = $time;
-                foreach ($this->own->conf->get($time) as $cmd){
+                foreach ($this->own->getConf()->get($time) as $cmd){
                     $this->own->getServer()->dispatchCommand(new ConsoleCommandSender(), str_replace("@p", $player->getName(), $cmd));
                 }
             }

@@ -8,7 +8,7 @@ abstract class ListenerManager extends PluginBase
   use starter\Starter;
   protected static $namelist = 
   [
-      "OnlinePlayerRecord"=>OnlinePlayerRecord::class
+      OnlinePlayerRecord::class,
   ];
   protected static $listeners = [];
   final protected static function register(Listener $listener):void

@@ -13,12 +13,12 @@ class OnlinePlayerRecord implements Listener
     /* Unit: minute */
     public static function getOnlineTime(string $player):int
     {
-        if(empty($time=self::getOnlineTime($player))) return 0;
-        return (int)$time/60;
+        if(($time=self::getRecord($player)) == 0) return 0;
+        return (int)((time()-$time)/60);
     }
-    private static function getRecord(string $player):array
+    private static function getRecord(string $player):int
     {
-        return isset(self::$record[$player]) ? self::$record[$player] : array();
+        return isset(self::$record[$player]) ? self::$record[$player] : 0;
     }
     public function onPlayerJoin(PlayerJoinEvent $event):void
     {
