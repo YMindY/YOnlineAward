@@ -27,8 +27,8 @@ class Main extends ListenerManager
   {
     self::registerListeners();
     $this->conf = new Config($this->getDataFolder()."/Config.yml",Config::YAML,array(
-        "奖励时间"=>5,
-        "奖励指令"=>["tell @p 你获得了在线奖励！"]
+        5=>["tell @p 你获得了5分钟在线奖励！"],
+        10=>["tell @p 你获得了10分钟在线奖励！"],
     ));
     
     $this->getScheduler()->scheduleRepeatingTask(new AwardTask($this), 20);
