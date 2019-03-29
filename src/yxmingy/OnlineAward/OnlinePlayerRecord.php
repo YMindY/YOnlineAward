@@ -9,7 +9,9 @@ use pocketmine\event\player\PlayerQuitEvent;
 
 class OnlinePlayerRecord implements Listener
 {
+    private static $date = [];
     private static $record = [];
+    
     /* Unit: minute */
     public static function getOnlineTime(string $player):int
     {
@@ -22,12 +24,18 @@ class OnlinePlayerRecord implements Listener
     }
     public function onPlayerJoin(PlayerJoinEvent $event):void
     {
-        self::$record[$event->getPlayer()->getName()] = time();
+        $name = $event->getPlayer()->getName();
+        if(!isset(self::$record[$name]) || self::$date[$name] != time("j")) {
+            self::$record[$name] = time();
+            self::$date[$name] = time("j");
+        }
     }
     public function onPlayerQuit(PlayerQuitEvent $event):void
     {
-        unset(self::$record[$event->getPlayer()->getName()]);
-        task\AwardTask::delRecord($event->getPlayer()->getName());
+        $name = $event->getPlayer()->getName();
+        if(self::$date[$name] != time("j")) {
+            unset(self::$record[$name]);
+        task\AwardTask::delRecord($name);
+        }
     }
 }
-
