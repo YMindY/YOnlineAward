@@ -25,17 +25,22 @@ class OnlinePlayerRecord implements Listener
     public function onPlayerJoin(PlayerJoinEvent $event):void
     {
         $name = $event->getPlayer()->getName();
-        if(!isset(self::$record[$name]) || self::$date[$name] != time("j")) {
+        if(!isset(self::$record[$name]) || self::$date[$name] != date("j")) {
             self::$record[$name] = time();
-            self::$date[$name] = time("j");
+            self::$date[$name] = date("j");
+            task\AwardTask::delRecord($name);
+        }
+        if(self::$record[$name] < 0) {
+            self::$record[$name] += time();
         }
     }
     public function onPlayerQuit(PlayerQuitEvent $event):void
     {
         $name = $event->getPlayer()->getName();
-        if(self::$date[$name] != time("j")) {
+        self::$record[$name] = self::$record[$name]-time();
+        if(self::$date[$name] != date("j")) {
             unset(self::$record[$name]);
-        task\AwardTask::delRecord($name);
+            task\AwardTask::delRecord($name);
         }
     }
 }
